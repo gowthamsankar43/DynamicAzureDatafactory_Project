@@ -1,9 +1,0 @@
-{
-	"name": "dataextraction",
-	"location": "centralindia",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "23e830ad-975a-49b1-8ebe-4482bdf220d0",
-		"tenantId": "a3881e6f-f92f-449c-b7e6-e9df56edaf30"
-	}
-}
