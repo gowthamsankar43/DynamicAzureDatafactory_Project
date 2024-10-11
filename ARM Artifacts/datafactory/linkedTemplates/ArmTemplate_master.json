@@ -7,19 +7,15 @@
             "metadata": "Data Factory name",
             "defaultValue": "adfcicddevv"
         },
-        "AzureDatabricks1_accessToken": {
+        "ETL Notebook_accessToken": {
             "type": "secureString",
-            "metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+            "metadata": "Secure string for 'accessToken' of 'ETL Notebook'"
         },
         "bronzelayer_accountKey": {
             "type": "secureString",
             "metadata": "Secure string for 'accountKey' of 'bronzelayer'"
         },
-        "AzureDatabricks1_properties_typeProperties_existingClusterId": {
-            "type": "string",
-            "defaultValue": "1011-115223-bnizpa1q"
-        },
-        "Get All bus stops data_properties_typeProperties_url": {
+        "RestAPI Service_properties_typeProperties_url": {
             "type": "string",
             "defaultValue": "http://api.wmata.com/"
         },
@@ -54,17 +50,14 @@
                     "factoryName": {
                         "value": "[parameters('factoryName')]"
                     },
-                    "AzureDatabricks1_accessToken": {
-                        "value": "[parameters('AzureDatabricks1_accessToken')]"
+                    "ETL Notebook_accessToken": {
+                        "value": "[parameters('ETL Notebook_accessToken')]"
                     },
                     "bronzelayer_accountKey": {
                         "value": "[parameters('bronzelayer_accountKey')]"
                     },
-                    "AzureDatabricks1_properties_typeProperties_existingClusterId": {
-                        "value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
-                    },
-                    "Get All bus stops data_properties_typeProperties_url": {
-                        "value": "[parameters('Get All bus stops data_properties_typeProperties_url')]"
+                    "RestAPI Service_properties_typeProperties_url": {
+                        "value": "[parameters('RestAPI Service_properties_typeProperties_url')]"
                     },
                     "bronzelayer_properties_typeProperties_url": {
                         "value": "[parameters('bronzelayer_properties_typeProperties_url')]"

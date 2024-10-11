@@ -7,19 +7,15 @@
             "metadata": "Data Factory name",
             "defaultValue": "adfcicddevv"
         },
-        "AzureDatabricks1_accessToken": {
+        "ETL Notebook_accessToken": {
             "type": "secureString",
-            "metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+            "metadata": "Secure string for 'accessToken' of 'ETL Notebook'"
         },
         "bronzelayer_accountKey": {
             "type": "secureString",
             "metadata": "Secure string for 'accountKey' of 'bronzelayer'"
         },
-        "AzureDatabricks1_properties_typeProperties_existingClusterId": {
-            "type": "string",
-            "defaultValue": "1011-115223-bnizpa1q"
-        },
-        "Get All bus stops data_properties_typeProperties_url": {
+        "RestAPI Service_properties_typeProperties_url": {
             "type": "string",
             "defaultValue": "http://api.wmata.com/"
         },
@@ -47,8 +43,8 @@
                             "timeout": "0.12:00:00",
                             "retry": 0,
                             "retryIntervalInSeconds": 30,
-                            "secureOutput": false,
-                            "secureInput": false
+                            "secureOutput": true,
+                            "secureInput": true
                         },
                         "userProperties": [],
                         "typeProperties": {
@@ -76,8 +72,8 @@
                             "timeout": "0.12:00:00",
                             "retry": 0,
                             "retryIntervalInSeconds": 30,
-                            "secureOutput": false,
-                            "secureInput": false
+                            "secureOutput": true,
+                            "secureInput": true
                         },
                         "userProperties": [],
                         "typeProperties": {
@@ -150,15 +146,15 @@
                             "timeout": "0.12:00:00",
                             "retry": 0,
                             "retryIntervalInSeconds": 30,
-                            "secureOutput": false,
-                            "secureInput": false
+                            "secureOutput": true,
+                            "secureInput": true
                         },
                         "userProperties": [],
                         "typeProperties": {
                             "notebookPath": "/Users/cloud_learning123_outlook.com#ext#@cloudlearning123outlook.onmicrosoft.com/ADFCICD/Notebooks/BronzeProcessingNotebook"
                         },
                         "linkedServiceName": {
-                            "referenceName": "AzureDatabricks1",
+                            "referenceName": "ETL Notebook",
                             "type": "LinkedServiceReference"
                         }
                     }
@@ -172,7 +168,7 @@
             "dependsOn": [
                 "[concat(variables('factoryId'), '/datasets/restapi')]",
                 "[concat(variables('factoryId'), '/datasets/target')]",
-                "[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+                "[concat(variables('factoryId'), '/linkedServices/ETL Notebook')]"
             ]
         },
         {
@@ -181,7 +177,7 @@
             "apiVersion": "2018-06-01",
             "properties": {
                 "linkedServiceName": {
-                    "referenceName": "Get All bus stops data",
+                    "referenceName": "RestAPI Service",
                     "type": "LinkedServiceReference"
                 },
                 "annotations": [],
@@ -192,7 +188,7 @@
                 "schema": []
             },
             "dependsOn": [
-                "[concat(variables('factoryId'), '/linkedServices/Get All bus stops data')]"
+                "[concat(variables('factoryId'), '/linkedServices/RestAPI Service')]"
             ]
         },
         {
@@ -221,33 +217,41 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/AzureDatabricks1')]",
+            "name": "[concat(parameters('factoryName'), '/ETL Notebook')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
+                "description": "Databricks Notebook for processing api data",
                 "annotations": [],
                 "type": "AzureDatabricks",
                 "typeProperties": {
                     "domain": "https://adb-3277455593214635.15.azuredatabricks.net",
                     "accessToken": {
                         "type": "SecureString",
-                        "value": "[parameters('AzureDatabricks1_accessToken')]"
+                        "value": "[parameters('ETL Notebook_accessToken')]"
                     },
-                    "existingClusterId": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+                    "newClusterNodeType": "Standard_DS3_v2",
+                    "newClusterNumOfWorker": "1",
+                    "newClusterSparkEnvVars": {
+                        "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                    },
+                    "newClusterVersion": "12.2.x-scala2.12",
+                    "clusterOption": "Fixed",
+                    "newClusterInitScripts": []
                 }
             },
             "dependsOn": []
         },
         {
-            "name": "[concat(parameters('factoryName'), '/Get All bus stops data')]",
+            "name": "[concat(parameters('factoryName'), '/RestAPI Service')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
-                "description": "Getting all bus stops data",
+                "description": "RestAPI Linked Service for getting realtime train data",
                 "annotations": [],
                 "type": "RestService",
                 "typeProperties": {
-                    "url": "[parameters('Get All bus stops data_properties_typeProperties_url')]",
+                    "url": "[parameters('RestAPI Service_properties_typeProperties_url')]",
                     "enableServerCertificateValidation": true,
                     "authenticationType": "Anonymous"
                 }

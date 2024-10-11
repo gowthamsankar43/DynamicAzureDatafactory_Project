@@ -2,7 +2,7 @@
 	"name": "restapi",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Get All bus stops data",
+			"referenceName": "RestAPI Service",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

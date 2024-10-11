@@ -1,9 +1,0 @@
-{
-	"name": "adfcicdprod",
-	"location": "southindia",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "9fc6a3e4-ae47-4b5b-99aa-ce671428cdde",
-		"tenantId": "a3881e6f-f92f-449c-b7e6-e9df56edaf30"
-	}
-}

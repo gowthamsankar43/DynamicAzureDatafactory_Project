@@ -5,16 +5,13 @@
         "factoryName": {
             "value": "adfcicddevv"
         },
-        "AzureDatabricks1_accessToken": {
+        "ETL Notebook_accessToken": {
             "value": ""
         },
         "bronzelayer_accountKey": {
             "value": ""
         },
-        "AzureDatabricks1_properties_typeProperties_existingClusterId": {
-            "value": "1011-115223-bnizpa1q"
-        },
-        "Get All bus stops data_properties_typeProperties_url": {
+        "RestAPI Service_properties_typeProperties_url": {
             "value": "http://api.wmata.com/"
         },
         "bronzelayer_properties_typeProperties_url": {

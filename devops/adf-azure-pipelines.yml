@@ -28,17 +28,3 @@ stages:
       overrideParameters: >
         -bronzelayer_properties_typeProperties_url $(bronzelayer_properties_typeProperties_url)
 
-- stage: PROD
-  variables:
-  - group: PROD
-  jobs:
-  - template: adf-deploy-job.yml
-    parameters:
-      environmentName: PROD
-      subscriptionId: 7dcc4a14-aa5a-4436-9a57-523982531dae
-      resourceGroupName: ADF_CICD_PROD
-      dataFactoryName: adfcicdprod
-      serviceConnectionName: adfCICDProdserviceconnection
-      overrideParameters: >
-        -bronzelayer_properties_typeProperties_url $(bronzelayer_properties_typeProperties_url)
-
