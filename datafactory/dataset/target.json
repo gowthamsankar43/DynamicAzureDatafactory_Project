@@ -1,5 +1,5 @@
 {
-	"name": "Json1",
+	"name": "target",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "bronzelayer",
@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "STS-116-mission",
 				"folderPath": "missions",
 				"fileSystem": "bronze"
 			}
