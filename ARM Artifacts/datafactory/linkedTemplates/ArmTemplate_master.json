@@ -1,0 +1,77 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "adfcicddevv"
+        },
+        "AzureDatabricks1_accessToken": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
+        },
+        "bronzelayer_accountKey": {
+            "type": "secureString",
+            "metadata": "Secure string for 'accountKey' of 'bronzelayer'"
+        },
+        "AzureDatabricks1_properties_typeProperties_existingClusterId": {
+            "type": "string",
+            "defaultValue": "1011-115223-bnizpa1q"
+        },
+        "Get All bus stops data_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "http://api.wmata.com/"
+        },
+        "bronzelayer_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://adfcicddatalakedev.dfs.core.windows.net/"
+        },
+        "containerUri": {
+            "type": "string",
+            "metadata": "URI to storage account containing linked ARM templates"
+        },
+        "containerSasToken": {
+            "type": "string",
+            "metadata": "Sas token to storage account containing linked ARM templates"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "adfcicddevv_ArmTemplate_0",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2024-03-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "AzureDatabricks1_accessToken": {
+                        "value": "[parameters('AzureDatabricks1_accessToken')]"
+                    },
+                    "bronzelayer_accountKey": {
+                        "value": "[parameters('bronzelayer_accountKey')]"
+                    },
+                    "AzureDatabricks1_properties_typeProperties_existingClusterId": {
+                        "value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+                    },
+                    "Get All bus stops data_properties_typeProperties_url": {
+                        "value": "[parameters('Get All bus stops data_properties_typeProperties_url')]"
+                    },
+                    "bronzelayer_properties_typeProperties_url": {
+                        "value": "[parameters('bronzelayer_properties_typeProperties_url')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}
