@@ -1,17 +1,44 @@
 trigger:
 - main
-
-pool:
-  vmImage: ubuntu-latest
+pool: ubuntuagent
 
 stages:
 
 - stage: BUILD
   jobs:
-  - template: adf-build-job.yml
+    - template: adf-build-job.yml
+      parameters:
+        subscriptionId: 7dcc4a14-aa5a-4436-9a57-523982531dae
+        resourceGroupName: ADF_CICD_DEV
+        dataFactoryName: adfcicddevv
+        repoRootFolder: /datafactory/
+        packageJsonFolder: /devops/
+
+- stage: DEV
+  variables:
+  - group: DEV
+  jobs:
+  - template: adf-deploy-job.yml
     parameters:
+      environmentName: DEV
       subscriptionId: 7dcc4a14-aa5a-4436-9a57-523982531dae
-      resourceGroupName: dynamicAzureDataFactory
-      dataFactoryName: dataextraction
-      repoRootFolder: /data-factory/
-      packageJsonFolder: /devops/
+      resourceGroupName: ADF_CICD_DEV
+      dataFactoryName: adfcicddevv
+      serviceConnectionName: adfCICDDevserviceconnection
+      overrideParameters: >
+        -bronzelayer_properties_typeProperties_url $(bronzelayer_properties_typeProperties_url)
+
+- stage: PROD
+  variables:
+  - group: PROD
+  jobs:
+  - template: adf-deploy-job.yml
+    parameters:
+      environmentName: PROD
+      subscriptionId: 7dcc4a14-aa5a-4436-9a57-523982531dae
+      resourceGroupName: ADF_CICD_PROD
+      dataFactoryName: adfcicdprod
+      serviceConnectionName: adfCICDProdserviceconnection
+      overrideParameters: >
+        -bronzelayer_properties_typeProperties_url $(bronzelayer_properties_typeProperties_url)
+

@@ -10,11 +10,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "STS-116-mission",
-				"folderPath": "missions",
+				"fileName": "RealTimeStatus.json",
+				"folderPath": "RealtimeTrainsStatus",
 				"fileSystem": "bronze"
 			}
 		},
 		"schema": {}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
